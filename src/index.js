@@ -34,7 +34,14 @@ function renderDOM(app) {
     return element
 }
 
-const app = createElement("div", { style: "color: red" }, ["Hello Vdom KW!!!"])
+const app = createElement(
+    "div",
+    { style: "color: red; font-family: sans-serif" },
+    [
+        createElement("div", { style: "margin-bottom: 8px" }, ["Hello Vdom KW!!!"]),
+        createElement("img", { src: "https://cataas.com/cat", width: 200 }),
+    ],
+)
 
 const root = createRoot(document.getElementById("app"))
 root.render(app)
