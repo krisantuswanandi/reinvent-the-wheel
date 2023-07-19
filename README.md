@@ -1,15 +1,7 @@
-# personal
+# VDom KW
 
-To install dependencies:
+Recreating Virtual DOM
 
-```bash
-bun install
-```
+### References
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v0.6.8. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+[Building a Simple Virtual DOM from Scratch](https://www.youtube.com/watch?v=85gJMUEcnkc&list=PLw5h0DiJ-9PDR77izSFx8w0ClkG7ulBBz) by [Jason Yu](https://twitter.com/ycmjason)
