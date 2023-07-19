@@ -21,6 +21,10 @@ function renderDOM(app) {
     }
 
     const element = document.createElement(app.tagName)
+
+    Object.keys(app.attributes).forEach(key => {
+        element.setAttribute(key, app.attributes[key])
+    })
     
     app.children.forEach(child => {
         const childElement = renderDOM(child)
@@ -30,7 +34,7 @@ function renderDOM(app) {
     return element
 }
 
-const app = createElement("div", {}, ["Hello Vdom KW!!!"])
+const app = createElement("div", { style: "color: red" }, ["Hello Vdom KW!!!"])
 
 const root = createRoot(document.getElementById("app"))
 root.render(app)
