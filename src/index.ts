@@ -1,21 +1,28 @@
-function createElement(tagName = "", attributes = {}, children = []) {
+type Attributes = Record<string, string>
+type VElement = {
+    tagName: string;
+    attributes: Attributes;
+    children: (VElement)[];
+} | string
+
+function createElement(tagName = "", attributes: Attributes = {}, children: VElement[] = []) {
     return {
         tagName,
         attributes,
         children,
-    }
+    } as VElement
 }
 
-function createRoot(rootNode) {
+function createRoot(rootNode: HTMLElement) {
     return {
-        render(app) {
+        render(app: VElement) {
             const appDOM = renderDOM(app)
             rootNode.append(appDOM)
         }
     }
 }
 
-function renderDOM(app) {
+function renderDOM(app: VElement) {
     if (typeof app === "string") {
         return document.createTextNode(app)
     }
@@ -39,9 +46,13 @@ const app = createElement(
     { style: "color: red; font-family: sans-serif" },
     [
         createElement("div", { style: "margin-bottom: 8px" }, ["Hello Vdom KW!!!"]),
-        createElement("img", { src: "https://cataas.com/cat", width: 200 }),
+        createElement("img", { src: "https://cataas.com/cat", width: "200px" }),
     ],
 )
 
-const root = createRoot(document.getElementById("app"))
-root.render(app)
+const rootEl = document.getElementById("app")
+
+if (rootEl) {
+    const root = createRoot(rootEl)
+    root.render(app)
+}

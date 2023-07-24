@@ -1,6 +1,6 @@
 {
   "name": "personal",
-  "module": "index.ts",
+  "module": "src/index.ts",
   "type": "module",
   "scripts": {
     "dev": "vite"
