@@ -2,8 +2,12 @@
   "name": "personal",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "vite"
+  },
   "devDependencies": {
-    "bun-types": "^0.6.0"
+    "bun-types": "^0.6.0",
+    "vite": "^4.4.6"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
