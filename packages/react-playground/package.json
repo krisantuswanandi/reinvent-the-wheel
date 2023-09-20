@@ -1,0 +1,18 @@
+{
+  "name": "react-playground",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "react": "workspace:*"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "vite": "^5.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

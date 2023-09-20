@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "play:react": "cd packages/react-playground && bun run dev",
     "play:vue": "cd packages/vue-playground && bun run dev"
   }
 }
