@@ -7,14 +7,16 @@ export type VElement =
   | {
       tagName: string;
       attributes: Attributes;
-      children: VElement[];
+      children: VElement | VElement[] | string;
     }
-  | string;
+  | string
+  | null
+  | undefined;
 
 export function createElement(
   tagName = "",
   attributes: Attributes = {},
-  children: VElement[] = []
+  ...children: VElement[]
 ) {
   return {
     tagName,
@@ -24,6 +26,10 @@ export function createElement(
 }
 
 export function render(vElement: VElement) {
+  if (!vElement) {
+    return;
+  }
+
   if (typeof vElement === "string") {
     return document.createTextNode(vElement);
   }
@@ -34,10 +40,17 @@ export function render(vElement: VElement) {
     element.setAttribute(key, vElement.attributes[key]);
   });
 
-  vElement.children.forEach((child) => {
-    const childElement = render(child);
-    element.append(childElement);
-  });
+  if (vElement.children && Array.isArray(vElement.children)) {
+    vElement.children.forEach((child) => {
+      const childElement = render(child);
+
+      if (childElement) {
+        element.append(childElement);
+      }
+    });
+  }
 
   return element;
 }
+
+export type { JSX } from "./types";

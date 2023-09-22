@@ -20,7 +20,10 @@ export function createApp(rootComponent: Component) {
       const rootVElement = componentRender();
 
       const rootElement = render(rootVElement);
-      rootContainer.append(rootElement);
+
+      if (rootElement) {
+        rootContainer.append(rootElement);
+      }
     },
   };
 }
