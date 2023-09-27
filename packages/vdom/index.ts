@@ -1,7 +1,7 @@
 /// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
-type Attributes = Record<string, string>;
+type Attributes = Record<string, any>;
 
 export type VElement =
   | {
@@ -42,9 +42,16 @@ export function render(vElement: VElement) {
   } else if (typeof vElement === "object") {
     const element = document.createElement(vElement.tagName);
 
-    Object.keys(vElement.attributes).forEach((key) => {
-      element.setAttribute(key, vElement.attributes[key]);
-    });
+    if (vElement.attributes) {
+      Object.keys(vElement.attributes).forEach((key) => {
+        if (key.startsWith("on")) {
+          const event = key.substring(2).toLowerCase();
+          element.addEventListener(event, vElement.attributes[key]);
+        } else {
+          element.setAttribute(key, vElement.attributes[key]);
+        }
+      });
+    }
 
     if (vElement.children && Array.isArray(vElement.children)) {
       vElement.children.forEach((child) => {
