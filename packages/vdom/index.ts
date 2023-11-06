@@ -7,7 +7,7 @@ export type VElement =
   | {
       tagName: string;
       attributes: Attributes;
-      children: VElement | VElement[];
+      children: VElement[];
     }
   | string
   | number
@@ -18,12 +18,12 @@ export type VElement =
 export function createElement(
   tagName = "",
   attributes: Attributes = {},
-  ...children: VElement[]
+  ...children: (VElement | VElement[])[]
 ) {
   const vElement: VElement = {
     tagName,
     attributes,
-    children,
+    children: children.flat(),
   };
   return vElement;
 }
