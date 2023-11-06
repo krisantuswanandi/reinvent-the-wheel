@@ -9,7 +9,7 @@ let stateIndex = 0;
 
 export function useState<T>(initialState: T) {
   const _stateIndex = stateIndex++;
-  states[_stateIndex] = states[_stateIndex] || initialState;
+  states[_stateIndex] = states[_stateIndex] ?? initialState;
 
   function setState(state: T) {
     states[_stateIndex] = state;
