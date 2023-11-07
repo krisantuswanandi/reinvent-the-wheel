@@ -21,6 +21,28 @@ export function useState<T>(initialState: T) {
   return [states[_stateIndex], setState];
 }
 
+const effects: any[] = [];
+let effectIndex = 0;
+
+export function useEffect<T>(callback: Function, deps?: any[]) {
+  const _effectIndex = effectIndex++;
+  const oldDeps = effects[_effectIndex];
+
+  effects[_effectIndex] = oldDeps || deps;
+
+  let changed = true;
+
+  if (oldDeps && deps && oldDeps.length === deps.length) {
+    changed = deps.some((dep, index) => {
+      return dep !== oldDeps[index];
+    });
+  }
+
+  if (changed) {
+    callback();
+  }
+}
+
 export function createRoot(rootContainer: Element) {
   return {
     render(rootComponent: Component) {
@@ -30,6 +52,8 @@ export function createRoot(rootContainer: Element) {
 
       update = () => {
         stateIndex = 0;
+        effectIndex = 0;
+
         const rootVElement = rootComponent();
         const rootElement = render(rootVElement);
 
